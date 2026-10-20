@@ -24,6 +24,5 @@
             <a href="{{ route('menu.index') }}" class="bg-brand-700 text-white px-5 py-2 rounded-full font-semibold">Pesan Lagi</a>
             <a href="{{ route('order.track', ['kode' => $code]) }}" class="border border-brand-300 px-5 py-2 rounded-full font-semibold text-brand-700">Lacak</a>
         </div>
-        <p class="text-xs text-stone-400 mt-4">Fase 1: data simulasi (belum tersimpan ke database).</p>
     </div>
 @endsection

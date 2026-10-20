@@ -24,7 +24,7 @@
 <body class="bg-brand-50 text-stone-800 min-h-screen flex flex-col">
     <header class="bg-brand-800 text-white sticky top-0 z-10 shadow">
         <nav class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-bold text-lg">☕ {{ $microsite['name'] ?? config('app.name') }}</a>
+            <a href="{{ route('home') }}" class="font-bold text-lg">☕ {{ $microsite->name }}</a>
             <div class="flex items-center gap-4 text-sm">
                 <a href="{{ route('home') }}" class="hover:underline">Beranda</a>
                 <a href="{{ route('menu.index') }}" class="hover:underline">Menu</a>
@@ -48,12 +48,12 @@
     <footer class="bg-brand-900 text-brand-100 text-sm mt-8">
         <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between gap-2">
             <div>
-                <p class="font-semibold">{{ $microsite['name'] ?? config('app.name') }}</p>
-                <p>{{ $microsite['settings']['address'] ?? '' }}</p>
+                <p class="font-semibold">{{ $microsite->name }}</p>
+                <p>{{ $microsite->settings['address'] ?? '' }}</p>
             </div>
             <div class="sm:text-right">
-                <p>🕗 {{ $microsite['settings']['open_hours'] ?? '' }}</p>
-                <p>📞 {{ $microsite['settings']['phone'] ?? '' }}</p>
+                <p>🕗 {{ $microsite->settings['open_hours'] ?? '' }}</p>
+                <p>📞 {{ $microsite->settings['phone'] ?? '' }}</p>
             </div>
         </div>
     </footer>

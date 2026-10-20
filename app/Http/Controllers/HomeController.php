@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\DummyCafeData;
+use App\Models\Category;
+use App\Models\Gallery;
+use App\Models\MenuItem;
+use App\Models\Promo;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -10,15 +13,17 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('home', [
-            'microsite' => DummyCafeData::microsite(),
-            'promos' => DummyCafeData::promos(),
-            'categories' => DummyCafeData::categories(),
-            'featuredMenus' => array_slice(
-                array_filter(DummyCafeData::menuItems(), fn (array $m) => $m['is_available']),
-                0,
-                4
-            ),
-            'galleries' => DummyCafeData::galleries(),
+            'promos' => Promo::whereDate('start_date', '<=', today())
+                ->whereDate('end_date', '>=', today())
+                ->orderByDesc('start_date')
+                ->get(),
+            'categories' => Category::orderBy('sort_order')->get(),
+            'featuredMenus' => MenuItem::where('is_available', true)
+                ->with('category')
+                ->orderByDesc('created_at')
+                ->take(4)
+                ->get(),
+            'galleries' => Gallery::orderByDesc('created_at')->get(),
         ]);
     }
 }
