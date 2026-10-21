@@ -1,24 +1,40 @@
-*.log
-.DS_Store
+### 1. Environment
 .env
-.env.backup
 .env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
-Homestead.json
-Homestead.yaml
+.env.*.local
+
+### 2. Vendor & Dependencies
+vendor/
+node_modules/
+composer.phar
+
+### 3. Laravel
+storage/framework/views/
+storage/framework/sessions/
+storage/framework/cache/data/
+storage/logs/*.log
+storage/logs/*.err
+
+### 4. Build & Cache
+public/hot
+public/storage
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+### 5. IDE & OS
+.DS_Store
 Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+### 6. Testing
+phpunit.xml
+coverage/
+
+### 7. Deployment
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache

@@ -1,59 +1,203 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+<!-- ================================================================
+     KAFE-SYSTEM - Microsite Online Ordering
+     ================================================================ -->
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://cdn-icons-png.flaticon.com/512/2554/2554270.png" width="120" alt="Café Logo">
 </p>
 
-## About Laravel
+<h1 align="center">Café System</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel"></a>
+  <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS"></a>
+  <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php" alt="PHP"></a>
+  <a href="https://www.mysql.com"><img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql" alt="MySQL"></a>
+  <a href="https://vitejs.dev"><img src="https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite" alt="Vite"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License"></a>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🎯 Overview
 
-## Learning Laravel
+**Café System** adalah microsite pemesanan makanan & minuman berbasis web (Laravel 12). Aplikasi ini dirancang untuk kafe/rumah makan dengan antarmuka penjualan yang modern, responsif, dan mudah digunakan.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Fitur Utama
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Fitur | Deskripsi |
+|-------|-----------|
+| 🏠 **Halaman Utama** | Hero section, informasi kafe, kontak, tim |
+| 🍽 **Menu Makanan** | Kategori lengkap, filter, deskripsi detail, gambar |
+| 🛒 **Shopping Cart** | Tambah/hapus items, update qty, subtotal live |
+| 💳 **Checkout** | Form konfirmasi + pembayaran (simulasi) |
+| ✅ **Order Success** | Konfirmasi pesanan & detail invoice |
+| 📍 **Track Pesanan** | Timeline: Baru → Diproses → Siap → Selesai |
 
-## Laravel Sponsors
+### Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Framework**: Laravel 12.x
+- **UI**: Tailwind CSS 4.x + Vite
+- **Language**: PHP 8.2+
+- **Database**: MySQL 8.0
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📁 Struktur Proyek
 
-## Contributing
+```
+café-system/
+├── app/
+│   ├── Http/Controllers/    # Controller (Home, Menu, Cart, Checkout)
+│   ├── Models/              # Eloquent models (MenuItem, Menu, Order)
+│   ├── Support/             # Helper functions
+│   └── Providers/           # Service providers
+├── config/
+│   └── cafe.php             # Custom config
+├── database/
+│   ├── migrations/          # 12 migrations
+│   └── seeders/             # Database seeders
+├── resources/
+│   ├── css/                 # Tailwind CSS
+│   ├── views/               # Blade templates
+│   │   ├── layouts/
+│   │   ├── home.blade.php
+│   │   ├── menu/            # Menu index & show
+│   │   ├── cart/            # Cart index
+│   │   ├── checkout/        # Checkout form
+│   │   └── order/           # Success & track
+│   └── js/                  # Vite assets
+├── public/
+├── routes/
+│   └── web.php              # Web routes
+├── tests/
+├── .env
+└── README.md
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 🚀 Instalasi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Prasyarat
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- MySQL 8+
 
-## Security Vulnerabilities
+### Langkah Install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# 1. Clone repository
+git clone https://github.com/Dzacky1302/cafe-system.git
+cd kafe-system
 
-## License
+# 2. Install dependencies
+composer install
+npm install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 3. Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# 4. Configure database (.env)
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kafe_system
+DB_USERNAME=root
+DB_PASSWORD=
+
+# 5. Run migrations
+php artisan migrate
+
+# 6. Seed database (opsional)
+php artisan db:seed
+
+# 7. Build assets
+npm run build
+
+# 8. Start development server
+php artisan serve
+```
+
+### Commands
+
+```bash
+# Build assets
+npm run dev
+npm run build
+
+# Run tests
+php artisan test
+
+# Clear cache
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+# Serve
+php artisan serve
+```
+
+---
+
+## 🔗 Routes
+
+| Method | URI | Controller | View |
+|--------|-----|------------|------|
+| GET | `/` | `HomeController@index` | `home.blade.php` |
+| GET | `/menu` | `MenuController@index` | `menu/index.blade.php` |
+| GET | `/menu/{category}` | `MenuController@index` | `menu/index.blade.php` |
+| GET | `/menu/{slug}` | `MenuController@show` | `menu/show.blade.php` |
+| GET | `/cart` | `CartController@index` | `cart/index.blade.php` |
+| GET | `/checkout` | `CheckoutController@create` | `checkout/create.blade.php` |
+| POST | `/checkout` | `CheckoutController@store` | Redirect |
+| GET | `/success` | `CheckoutController@success` | `order/success.blade.php` |
+| GET | `/track/{orderId}` | `HomeController@track` | `order/track.blade.php` |
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+php artisan test
+
+# Run specific test
+php artisan test tests/Feature/MicrositeFlowTest.php
+
+# Run with coverage
+php artisan test --coverage
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Gagal saat `composer install`
+```bash
+php artisan key:generate
+cp .env.example .env
+```
+
+### Asset tidak tampil
+```bash
+npm run build
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork it
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
+
+---
+
+## 📄 License
+
+The MIT License (MIT). Please see [LICENSE](LICENSE) file for more information.
+
+
