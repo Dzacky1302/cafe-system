@@ -3,46 +3,61 @@
 @section('title', 'Checkout — ' . $microsite['name'])
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">🧾 Checkout</h1>
+    <div class="max-w-3xl mx-auto">
+        <h1 class="font-serif text-3xl font-bold text-brand-900 mb-2">🧾 Checkout</h1>
+        <p class="text-stone-500 text-sm mb-10 reveal-up">Isi detail pesanan Anda</p>
 
-    <div class="bg-white rounded-xl border border-brand-100 p-4 mb-4">
-        <p class="font-semibold mb-2">Ringkasan ({{ count($cart) }} item)</p>
-        @foreach ($cart as $item)
-            <div class="flex justify-between text-sm py-1 border-b border-stone-100">
-                <span>{{ $item['item_name'] }} × {{ $item['quantity'] }}</span>
-                <span class="font-medium">{{ rupiah($item['unit_price'] * $item['quantity']) }}</span>
+        {{-- Ringkasan --}}
+        <div class="glass rounded-2xl border border-brand-200 p-6 mb-8 reveal-up">
+            <h3 class="font-serif text-lg font-bold text-brand-900 mb-4">Ringkasan Pesanan</h3>
+            <p class="text-stone-600 text-sm mb-4">{{ count($cart) }} item</p>
+            <div class="space-y-3">
+                @foreach ($cart as $item)
+                    <div class="flex justify-between text-sm border-b border-brand-50 pb-2">
+                        <span class="text-stone-600">{{ $item['item_name'] }} × {{ $item['quantity'] }}</span>
+                        <span class="font-medium text-brand-800">{{ rupiah($item['unit_price'] * $item['quantity']) }}</span>
+                    </div>
+                @endforeach
+                <div class="flex justify-between mt-4 pt-4 border-t border-brand-100">
+                    <span class="font-bold text-brand-900">Total</span>
+                    <span class="font-serif text-lg font-bold text-brand-900">{{ rupiah($total) }}</span>
+                </div>
             </div>
-        @endforeach
-        <p class="font-bold mt-2 text-right">Total: <span class="text-brand-700">{{ rupiah($total) }}</span></p>
+        </div>
+
+        {{-- Form --}}
+        <form action="{{ route('checkout.store') }}" method="POST" class="glass rounded-2xl border border-brand-200 p-6 space-y-6 reveal-up" style="animation-delay: 0.1s;">
+            @csrf
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 uppercase mb-2">Nama Lengkap <span class="text-brand-500">*</span></label>
+                    <input type="text" name="customer_name" value="{{ old('customer_name') }}" required
+                           class="w-full border border-stone-300 rounded-xl px-4 py-3 input-luxury" placeholder="Nama Anda">
+                    @error('customer_name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-stone-600 uppercase mb-2">Nomor Meja</label>
+                    <input type="text" name="table_number" value="{{ old('table_number') }}"
+                           class="w-full border border-stone-300 rounded-xl px-4 py-3 input-luxury" placeholder="cth: 3">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-medium text-stone-600 uppercase mb-2">Nomor HP</label>
+                    <input type="text" name="customer_phone" value="{{ old('customer_phone') }}"
+                           class="w-full border border-stone-300 rounded-xl px-4 py-3 input-luxury" placeholder="08123456789">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-medium text-stone-600 uppercase mb-2">Catatan Khusus</label>
+                    <textarea name="notes" rows="3" class="w-full border border-stone-300 rounded-xl px-4 py-3 input-luxury"
+                              placeholder="cth: gula dipisah, tidak pedas">{{ old('notes') }}</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-gold bg-gold-400 text-brand-900 font-bold py-3.5 rounded-xl px-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 hover:bg-gold-300 w-full flex items-center justify-center gap-2">
+                Buat Pesanan →
+            </button>
+        </form>
     </div>
-
-    <form action="{{ route('checkout.store') }}" method="POST" class="bg-white rounded-xl border border-brand-100 p-4 space-y-3">
-        @csrf
-        <div>
-            <label class="text-sm font-medium">Nama *</label>
-            <input type="text" name="customer_name" value="{{ old('customer_name') }}" required
-                   class="w-full border border-stone-300 rounded px-3 py-2 mt-1" placeholder="Nama kamu">
-            @error('customer_name')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-            <div>
-                <label class="text-sm font-medium">No. Meja</label>
-                <input type="text" name="table_number" value="{{ old('table_number') }}"
-                       class="w-full border border-stone-300 rounded px-3 py-2 mt-1" placeholder="cth: 3">
-            </div>
-            <div>
-                <label class="text-sm font-medium">No. HP</label>
-                <input type="text" name="customer_phone" value="{{ old('customer_phone') }}"
-                       class="w-full border border-stone-300 rounded px-3 py-2 mt-1" placeholder="08xx">
-            </div>
-        </div>
-        <div>
-            <label class="text-sm font-medium">Catatan</label>
-            <textarea name="notes" rows="2" class="w-full border border-stone-300 rounded px-3 py-2 mt-1"
-                      placeholder="cth: gula dipisah">{{ old('notes') }}</textarea>
-        </div>
-        <button class="w-full bg-brand-700 hover:bg-brand-600 text-white font-bold py-2.5 rounded-full">
-            Buat Pesanan
-        </button>
-    </form>
 @endsection

@@ -13,6 +13,7 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('home', [
+            'activeCategory' => null,
             'promos' => Promo::whereDate('start_date', '<=', today())
                 ->whereDate('end_date', '>=', today())
                 ->orderByDesc('start_date')

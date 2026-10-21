@@ -3,43 +3,64 @@
 @section('title', 'Keranjang — ' . $microsite['name'])
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">🛒 Keranjang</h1>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="font-serif text-3xl font-bold text-brand-900 mb-2">🛒 Keranjang Belanja</h1>
+        <p class="text-stone-500 text-sm mb-10 reveal-up">Periksa pesanan Anda sebelum checkout</p>
 
-    @if (empty($cart))
-        <div class="bg-white rounded-xl border border-brand-100 p-8 text-center">
-            <p class="text-stone-500 mb-4">Keranjang masih kosong.</p>
-            <a href="{{ route('menu.index') }}" class="bg-brand-700 text-white px-5 py-2 rounded-full font-semibold">Pilih Menu</a>
-        </div>
-    @else
-        <div class="bg-white rounded-xl border border-brand-100 divide-y">
-            @foreach ($cart as $id => $item)
-                <div class="p-4 flex items-center justify-between gap-3">
-                    <div>
-                        <p class="font-semibold">{{ $item['item_name'] }}</p>
-                        <p class="text-sm text-stone-500">{{ rupiah($item['unit_price']) }} × {{ $item['quantity'] }}</p>
-                        <p class="font-bold text-brand-700 text-sm">{{ rupiah($item['unit_price'] * $item['quantity']) }}</p>
+        @if (empty($cart))
+            <div class="text-center py-20 reveal-up">
+                <div class="text-6xl mb-4">🛒</div>
+                <h3 class="font-serif text-xl font-bold text-brand-900 mb-2">Keranjang masih kosong</h3>
+                <p class="text-stone-500">Belum ada item di keranjang Anda.</p>
+                <a href="{{ route('menu.index') }}" class="mt-6 inline-block btn-gold bg-gold-400 text-brand-900 font-semibold px-8 py-3 rounded-full hover:bg-gold-300 transition-all">
+                    Pilih Menu →
+                </a>
+            </div>
+        @else
+            <div class="glass rounded-2xl border border-brand-200 overflow-hidden reveal-up">
+                @foreach ($cart as $id => $item)
+                    <div class="p-6 border-b border-brand-100 last:border-0 flex flex-col md:flex-row items-center justify-between gap-4 group hover:bg-brand-50/50 transition-colors">
+                        <div class="flex items-center gap-4 min-w-0">
+                            <div class="w-16 h-16 rounded-xl bg-brand-100 flex items-center justify-center text-xl flex-shrink-0">
+                                🍽️
+                            </div>
+                            <div>
+                                <p class="font-semibold text-stone-800 text-sm">{{ $item['item_name'] }}</p>
+                                <p class="text-xs text-stone-500">{{ rupiah($item['unit_price']) }} × {{ $item['quantity'] }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="font-bold text-brand-900 text-sm">
+                                {{ rupiah($item['unit_price'] * $item['quantity']) }}
+                            </div>
+                            <form action="{{ route('cart.update', $id) }}" method="POST" class="flex items-center gap-2">
+                                @csrf @method('PATCH')
+                                <input type="number" name="qty" value="{{ $item['quantity'] }}" min="1" max="20"
+                                       class="w-20 border border-stone-300 rounded-xl px-3 py-2 input-luxury text-center">
+                                <button class="text-xs bg-stone-100 text-stone-600 px-3 py-1.5 rounded hover:bg-stone-200 transition-colors">
+                                    Ubah
+                                </button>
+                            </form>
+                            <form action="{{ route('cart.destroy', $id) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded hover:bg-red-100 transition-colors">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <form action="{{ route('cart.update', $id) }}" method="POST" class="flex items-center gap-1">
-                            @csrf @method('PATCH')
-                            <input type="number" name="qty" value="{{ $item['quantity'] }}" min="1" max="20"
-                                   class="w-14 border border-stone-300 rounded px-1.5 py-1 text-sm">
-                            <button class="text-xs bg-stone-200 px-2 py-1.5 rounded">Ubah</button>
-                        </form>
-                        <form action="{{ route('cart.destroy', $id) }}" method="POST">
-                            @csrf @method('DELETE')
-                            <button class="text-xs bg-red-100 text-red-700 px-2 py-1.5 rounded">Hapus</button>
-                        </form>
-                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 reveal-up" style="animation-delay: 0.2s;">
+                <div>
+                    <p class="text-stone-600 text-sm">Total Belanja</p>
+                    <p class="font-serif text-2xl font-bold text-brand-900">{{ rupiah($total) }}</p>
                 </div>
-            @endforeach
-        </div>
-
-        <div class="mt-4 flex items-center justify-between">
-            <p class="font-bold text-lg">Total: <span class="text-brand-700">{{ rupiah($total) }}</span></p>
-            <a href="{{ route('checkout.create') }}" class="bg-brand-700 hover:bg-brand-600 text-white font-semibold px-6 py-2.5 rounded-full">
-                Checkout →
-            </a>
-        </div>
-    @endif
+                <a href="{{ route('checkout.create') }}" class="btn-gold bg-gold-400 text-brand-900 font-bold py-3.5 rounded-xl px-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 hover:bg-gold-300 w-full sm:w-auto text-center">
+                    Checkout Sekarang →
+                </a>
+            </div>
+        @endif
+    </div>
 @endsection

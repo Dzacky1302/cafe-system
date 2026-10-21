@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Idempotent: aman dijalankan berulang tanpa bentrok unique email.
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => 'password',
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Data microsite (kategori, menu, promo, pesanan) ke DB microsite_db.
+        $this->call(MicrositeSeeder::class);
     }
 }
