@@ -18,6 +18,7 @@ storage/logs/*.err
 ### 4. Build & Cache
 public/hot
 public/storage
+public/build/
 npm-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
