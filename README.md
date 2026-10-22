@@ -102,7 +102,7 @@ php artisan key:generate
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=kafe_system
+DB_DATABASE=microsite_db
 DB_USERNAME=root
 DB_PASSWORD=
 
