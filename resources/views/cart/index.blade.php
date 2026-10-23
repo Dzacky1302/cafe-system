@@ -5,17 +5,17 @@
 @section('content')
     <div class="max-w-4xl mx-auto">
         <div class="text-center mb-10 reveal-up">
-            <p class="text-[11px] uppercase tracking-[0.28em] mb-2" style="color: var(--gold-400);">Shopping Cart</p>
-            <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-3" style="color: var(--gold-100);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-100)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="ml-2">Keranjang Belanja</span></h1>
-            <p class="text-sm" style="color: rgba(248,217,125,0.55);">Periksa pesanan Anda sebelum checkout</p>
+            <p class="text-[11px] uppercase tracking-[0.28em] mb-2 text-gold-600 dark:text-gold-400">Shopping Cart</p>
+            <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-3 text-gold-700 dark:text-gold-100"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-100)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="ml-2">Keranjang Belanja</span></h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Periksa pesanan Anda sebelum checkout</p>
             <div class="gold-rule mt-5 max-w-xs mx-auto"></div>
         </div>
 
         @if (empty($cart))
             <div class="text-center py-24 reveal-up">
                 <div class="text-6xl mb-5"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div>
-                <h3 class="font-serif text-2xl font-bold mb-2" style="color: var(--gold-100);">Keranjang masih kosong</h3>
-                <p class="text-sm mb-7" style="color: rgba(248,217,125,0.5);">Belum ada item di keranjang Anda.</p>
+                <h3 class="font-serif text-2xl font-bold mb-2 text-gold-700 dark:text-gold-100">Keranjang masih kosong</h3>
+                <p class="text-sm mb-7 text-gray-500 dark:text-gray-400">Belum ada item di keranjang Anda.</p>
                 <a href="{{ route('menu.index') }}" class="btn-gold px-8 py-3.5">
                     Pilih Menu
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -31,13 +31,13 @@
                                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4H7zM7 10h10v4H7zM7 16h10v4H7z"/></svg>
                             </div>
                             <div class="min-w-0">
-                                <p class="font-semibold text-sm truncate" style="color: var(--gold-100);">{{ $item['item_name'] }}</p>
-                                <p class="text-xs mt-1" style="color: rgba(248,217,125,0.5);">{{ rupiah($item['unit_price']) }} × {{ $item['quantity'] }}</p>
+                                <p class="font-semibold text-sm truncate text-gold-700 dark:text-gold-100">{{ $item['item_name'] }}</p>
+                                <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">{{ rupiah($item['unit_price']) }} × {{ $item['quantity'] }}</p>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-                            <span class="font-serif text-lg font-bold" style="color: var(--gold-300);">
+                            <span class="font-serif text-lg font-bold text-gold-500 dark:text-gold-300">
                                 {{ rupiah($item['unit_price'] * $item['quantity']) }}
                             </span>
 
@@ -61,7 +61,7 @@
 
             <div class="mt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5 reveal-up" style="transition-delay: 0.15s;">
                 <div class="glass rounded-2xl px-6 py-4 flex-1">
-                    <p class="text-xs uppercase tracking-[0.2em] mb-1" style="color: rgba(248,217,125,0.45);">Total Belanja</p>
+                    <p class="text-xs uppercase tracking-[0.2em] mb-1 text-gray-500 dark:text-gray-400">Total Belanja</p>
                     <p class="font-serif text-3xl font-bold fade-gold">{{ rupiah($total) }}</p>
                 </div>
                 <a href="{{ route('checkout.create') }}" class="btn-gold px-8 py-3.5 sm:w-auto w-full text-center">

@@ -5,27 +5,27 @@
 @section('content')
     <div class="max-w-3xl mx-auto">
         <div class="text-center mb-10 reveal-up">
-            <p class="text-[11px] uppercase tracking-[0.28em] mb-2" style="color: var(--gold-400);">Checkout</p>
-            <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-3" style="color: var(--gold-100);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-100)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="6 9 6 2 18 2"/><line x1="6" y1="9" x2="6" y2="2"/></svg><span class="ml-2">Checkout</span></h1>
-            <p class="text-sm" style="color: rgba(248,217,125,0.55);">Isi detail pesanan Anda</p>
+            <p class="text-[11px] uppercase tracking-[0.28em] mb-2 text-gold-600 dark:text-gold-400">Checkout</p>
+            <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-3 text-gold-700 dark:text-gold-100"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-100)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="6 9 6 2 18 2"/><line x1="6" y1="9" x2="6" y2="2"/></svg><span class="ml-2">Checkout</span></h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Isi detail pesanan Anda</p>
             <div class="gold-rule mt-5 max-w-xs mx-auto"></div>
         </div>
 
         {{-- ============ RINGKASAN ============ --}}
         <div class="glass rounded-2xl p-6 mb-8 reveal-up">
-            <h3 class="font-serif text-xl font-bold mb-1" style="color: var(--gold-100);">Ringkasan Pesanan</h3>
-            <p class="text-sm mb-5" style="color: rgba(248,217,125,0.5);">{{ count($cart) }} item</p>
+            <h3 class="font-serif text-xl font-bold mb-1 text-gold-700 dark:text-gold-100">Ringkasan Pesanan</h3>
+            <p class="text-sm mb-5 text-gray-500 dark:text-gray-400">{{ count($cart) }} item</p>
 
             <div class="space-y-3">
                 @foreach ($cart as $item)
                     <div class="flex justify-between items-center text-sm pb-3" style="border-bottom: 1px solid rgba(212,175,55,0.08);">
-                        <span style="color: rgba(248,217,125,0.7);">{{ $item['item_name'] }} <span style="color: rgba(248,217,125,0.4);">× {{ $item['quantity'] }}</span></span>
-                        <span class="font-medium" style="color: var(--gold-200);">{{ rupiah($item['unit_price'] * $item['quantity']) }}</span>
+                        <span class="text-gray-400 dark:text-gray-300">{{ $item['item_name'] }} <span class="text-gray-500 dark:text-gray-400">× {{ $item['quantity'] }}</span></span>
+                        <span class="font-medium text-gold-500 dark:text-gold-200">{{ rupiah($item['unit_price'] * $item['quantity']) }}</span>
                     </div>
                 @endforeach
 
                 <div class="flex justify-between items-center mt-5 pt-5" style="border-top: 1px solid var(--line-gold);">
-                    <span class="font-bold" style="color: var(--gold-100);">Total</span>
+                    <span class="font-bold text-gold-700 dark:text-gold-100">Total</span>
                     <span class="font-serif text-2xl font-bold fade-gold">{{ rupiah($total) }}</span>
                 </div>
             </div>

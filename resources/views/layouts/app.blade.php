@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,138 +35,148 @@
         };
     </script>
     <style>
-        /* ============ LIGHT THEME OVERRIDES (comprehensive) ============ */
-        [data-theme="light"] {
-            --bg-base: #faf6ef;
-            --bg-card: #ffffff;
-            --glass-bg: rgba(250, 246, 239, 0.9);
-            --glass-border: rgba(45, 36, 26, 0.12);
-            --border: rgba(45, 36, 26, 0.12);
-            --border-strong: rgba(45, 36, 26, 0.22);
-            --line-gold: rgba(212, 175, 55, 0.3);
-            --shadow-card: 0 16px 44px rgba(45, 36, 26, 0.08);
-            --shadow-card-hover: 0 22px 60px rgba(45, 36, 26, 0.12);
+        /* ============ CSS VARIABLE OVERRIDES FOR LIGHT THEME ============ */
+        /* Ensures inline style="color: var(--gold-*)" works in light theme */
+        html:not(.dark) {
             --gold-100: #b8860b;
             --gold-300: #8a6d1f;
             --gold-400: #5f4d15;
-            --text-base: #2d241a;
-            --text-muted: rgba(45, 36, 26, 0.62);
-            --brand-50: rgba(212, 175, 55, 0.07);
-            --brand-100: rgba(212, 175, 55, 0.12);
+            --gold-200: #d4af37;
+            --line-gold: rgba(45, 36, 26, 0.12);
         }
-        [data-theme="light"] body {
+
+        /* ============ BASE DARK THEME (default, html.dark) ============ */
+        body {
+            background: #0b0705;
+            color: #fbeeac;
+        }
+
+        /* ============ LIGHT THEME (html:not(.dark)) ============ */
+        html:not(.dark) body {
             background: #faf6ef;
             color: #2d241a;
         }
-        [data-theme="light"] .nav-lux {
+
+        /* Navigation */
+        .nav-lux {
+            background: rgba(11, 7, 5, 0.9);
+            border-bottom-color: rgba(248, 217, 125, 0.1);
+        }
+        html:not(.dark) .nav-lux {
             background: rgba(250, 246, 239, 0.92);
             border-bottom-color: rgba(45, 36, 26, 0.12);
         }
-        [data-theme="light"] .nav-lux.scrolled {
-            background: rgba(250, 246, 239, 0.97);
+
+        /* Glass & cards */
+        .glass {
+            background: rgba(26, 20, 14, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        [data-theme="light"] .glass {
+        html:not(.dark) .glass {
             background: rgba(255, 255, 255, 0.85);
             border-color: rgba(45, 36, 26, 0.15);
         }
-        [data-theme="light"] .card-gold {
+        .card-gold {
+            background: #1a110b;
+            border: 1px solid rgba(248, 217, 125, 0.08);
+        }
+        html:not(.dark) .card-gold {
             background: #ffffff;
             border-color: rgba(45, 36, 26, 0.15);
         }
-        [data-theme="light"] .gold-glow,
-        [data-theme="light"] .gold-glow-2 {
+
+        /* Ambient layers — hide in light theme */
+        .gold-glow,
+        .gold-glow-2,
+        .star-field {
+            pointer-events: none;
+        }
+        html:not(.dark) .gold-glow,
+        html:not(.dark) .gold-glow-2,
+        html:not(.dark) .star-field {
             display: none !important;
         }
-        [data-theme="light"] .star-field {
-            display: none !important;
+
+        /* Buttons */
+        .btn-gold-outline {
+            border-color: rgba(248, 217, 125, 0.5);
+            color: #fbeeac;
         }
-        [data-theme="light"] [style*="color: var(--gold-100)"],
-        [data-theme="light"] [style*='color: var(--gold-100)'] {
-            color: #b8860b !important;
-        }
-        [data-theme="light"] [style*="color: var(--gold-300)"],
-        [data-theme="light"] [style*='color: var(--gold-300)'] {
-            color: #8a6d1f !important;
-        }
-        [data-theme="light"] [style*="color: var(--gold-400)"],
-        [data-theme="light"] [style*='color: var(--gold-400)'] {
-            color: #5f4d15 !important;
-        }
-        [data-theme="light"] .btn-gold-outline {
+        html:not(.dark) .btn-gold-outline {
             border-color: #8a6d1f;
             color: #1a110b;
         }
-        [data-theme="light"] .btn-gold-outline:hover {
+        html:not(.dark) .btn-gold-outline:hover {
             background: #d4af37;
             color: #fff;
         }
-        [data-theme="light"] .btn-ghost {
+
+        .btn-ghost {
+            color: #fbeeac;
+        }
+        html:not(.dark) .btn-ghost {
             color: #2d241a;
         }
-        [data-theme="light"] .btn-ghost:hover {
+        html:not(.dark) .btn-ghost:hover {
             background: rgba(45, 36, 26, 0.08);
         }
-        [data-theme="light"] .input-luxury {
+
+        /* Inputs */
+        .input-luxury {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(248, 217, 125, 0.15);
+            color: #fbeeac;
+        }
+        html:not(.dark) .input-luxury {
             background: #ffffff;
             border-color: rgba(45, 36, 26, 0.2);
             color: #2d241a;
         }
-        [data-theme="light"] .input-luxury::placeholder {
+        html:not(.dark) .input-luxury::placeholder {
             color: rgba(45, 36, 26, 0.45);
         }
-        [data-theme="light"] .badge-status-pending,
-        [data-theme="light"] .badge-status-preparing,
-        [data-theme="light"] .badge-status-ready,
-        [data-theme="light"] .badge-status-done,
-        [data-theme="light"] .badge-status-cancel {
-            color: #2d241a;
-            border-color: rgba(45, 36, 26, 0.2);
+
+        /* Badges */
+        .badge-status-pending .dot,
+        .badge-status-preparing .dot,
+        .badge-status-ready .dot,
+        .badge-status-done .dot,
+        .badge-status-cancel .dot {
+            background: #d4af37;
         }
-        [data-theme="light"] .badge-status-pending .dot,
-        [data-theme="light"] .badge-status-preparing .dot,
-        [data-theme="light"] .badge-status-ready .dot,
-        [data-theme="light"] .badge-status-done .dot,
-        [data-theme="light"] .badge-status-cancel .dot {
+        html:not(.dark) .badge-status-pending .dot,
+        html:not(.dark) .badge-status-preparing .dot,
+        html:not(.dark) .badge-status-ready .dot,
+        html:not(.dark) .badge-status-done .dot,
+        html:not(.dark) .badge-status-cancel .dot {
             background: #b8860b;
         }
-        [data-theme="light"] .gold-rule {
+
+        /* Scroll rule */
+        .gold-rule {
+            background: rgba(248, 217, 125, 0.15);
+            height: 2px;
+        }
+        html:not(.dark) .gold-rule {
             background: rgba(45, 36, 26, 0.12);
         }
-        [data-theme="light"] svg[stroke="var(--gold-100)"],
-        [data-theme="light"] svg[stroke="var(--gold-300)"],
-        [data-theme="light"] svg[stroke="var(--gold-400)"] {
+
+        /* SVG stroke colors */
+        svg[stroke="var(--gold-100)"],
+        svg[stroke="var(--gold-300)"],
+        svg[stroke="var(--gold-400)"] {
+            stroke: #d4af37;
+        }
+        html:not(.dark) svg[stroke="var(--gold-100)"],
+        html:not(.dark) svg[stroke="var(--gold-300)"],
+        html:not(.dark) svg[stroke="var(--gold-400)"] {
             stroke: #8a6d1f !important;
         }
-        [data-theme="light"] svg[stroke="currentColor"] {
-            stroke: #2d241a !important;
+        svg[stroke="currentColor"] {
+            stroke: #fbeeac;
         }
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.55)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.55)'],
-        [data-theme="light"] [style*="color: rgba(248, 217, 125, 0.55)"],
-        [data-theme="light"] [style*='color: rgba(248, 217, 125, 0.55)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.5)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.5)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.45)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.45)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.4)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.4)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.3)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.3)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.25)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.25)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.2)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.2)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.15)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.15)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.08)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.08)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.72)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.72)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.7)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.7)'],
-        [data-theme="light"] [style*="color: rgba(248,217,125,0.58)"],
-        [data-theme="light"] [style*='color: rgba(248,217,125,0.58)'] {
-            color: rgba(45, 36, 26, 0.62) !important;
+        html:not(.dark) svg[stroke="currentColor"] {
+            stroke: #2d241a !important;
         }
     </style>
 
@@ -263,17 +273,17 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-6" style="border-bottom: 1px solid rgba(212,175,55,0.12);">
                 <div>
-                    <h3 class="font-serif text-xl font-bold mb-3" style="color: var(--gold-100);">{{ $microsite->name }}</h3>
-                    <p class="text-sm leading-relaxed" style="color: rgba(248,217,125,0.55);">{{ $microsite->settings['address'] ?? '' }}</p>
+                    <h3 class="font-serif text-xl font-bold mb-3 text-gold-700 dark:text-gold-100">{{ $microsite->name }}</h3>
+                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">{{ $microsite->settings['address'] ?? '' }}</p>
                 </div>
                 <div>
-                    <h3 class="font-serif text-xl font-bold mb-3" style="color: var(--gold-100);">Tentang Kami</h3>
-                    <p class="text-sm leading-relaxed" style="color: rgba(248,217,125,0.55);">Kopi premium yang disajikan dengan hangat dan penuh cinta untuk setiap momen nongkrong Anda.</p>
+                    <h3 class="font-serif text-xl font-bold mb-3 text-gold-700 dark:text-gold-100">Tentang Kami</h3>
+                    <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">Kopi premium yang disajikan dengan hangat dan penuh cinta untuk setiap momen nongkrong Anda.</p>
                 </div>
                 <div class="text-left md:text-right">
-                    <h3 class="font-serif text-xl font-bold mb-3" style="color: var(--gold-100);">Kontak</h3>
-                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{{ $microsite->settings['open_hours'] ?? '' }}</p>
-                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>{{ $microsite->settings['phone'] ?? '' }}</p>
+                    <h3 class="font-serif text-xl font-bold mb-3 text-gold-700 dark:text-gold-100">Kontak</h3>
+                    <p class="text-sm mb-1 text-gray-500 dark:text-gray-400"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{{ $microsite->settings['open_hours'] ?? '' }}</p>
+                    <p class="text-sm mb-1 text-gray-500 dark:text-gray-400"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>{{ $microsite->settings['phone'] ?? '' }}</p>
                     <div class="flex gap-3 mt-3">
                         <a href="https://facebook.com" class="btn-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
                         <a href="https://instagram.com" class="btn-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM1.75 17.25c1.17 1.17 2.58 1.78 4.16 1.78h3.14c1.58 0 3-0.61 4.16-1.78"/></svg></a>
@@ -281,7 +291,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center text-xs" style="color: rgba(248,217,125,0.4);">
+            <div class="text-center text-xs text-gray-600 dark:text-gray-500">
                 &copy; {{ date('Y') }} {{ $microsite->name }}. All rights reserved.
             </div>
         </div>
@@ -357,16 +367,16 @@
             var themeBtn = document.getElementById('themeToggle');
             var savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
-                html.setAttribute('data-theme', 'light');
+                html.classList.remove('dark');
             }
             if (themeBtn) {
                 themeBtn.addEventListener('click', function () {
-                    var isLight = html.getAttribute('data-theme') === 'light';
+                    var isLight = !html.classList.contains('dark');
                     if (isLight) {
-                        html.removeAttribute('data-theme');
+                        html.classList.add('dark');
                         localStorage.setItem('theme', 'dark');
                     } else {
-                        html.setAttribute('data-theme', 'light');
+                        html.classList.remove('dark');
                         localStorage.setItem('theme', 'light');
                     }
                 });

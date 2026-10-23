@@ -15,7 +15,7 @@
                     @if ($menu->imageUrl())
                         <img src="{{ $menu->imageUrl() }}" alt="{{ $menu->name }}" class="w-full h-full object-cover">
                     @else
-                        <div class="w-full h-full flex items-center justify-center text-6xl" style="background: rgba(212,175,55,0.07);">️</div>
+                        <div class="w-full h-full flex items-center justify-center text-6xl bg-gold-50 dark:bg-gray-900/20">️</div>
                     @endif
                     <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 50%, rgba(11,7,5,0.9) 100%);"></div>
                     <span class="absolute top-4 left-4 badge-gold">
@@ -25,16 +25,16 @@
             </div>
 
             <div class="flex flex-col reveal-right">
-                <p class="text-[11px] uppercase tracking-[0.28em] font-semibold mb-2" style="color: var(--gold-400);">{{ $menu->category?->name }}</p>
-                <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4 leading-tight" style="color: var(--gold-100);">{{ $menu->name }}</h1>
-                <p class="text-base leading-relaxed mb-6" style="color: rgba(248,217,125,0.62);">{{ $menu->description }}</p>
+                <p class="text-[11px] uppercase tracking-[0.28em] font-semibold mb-2 text-gold-600 dark:text-gold-400">{{ $menu->category?->name }}</p>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4 leading-tight text-gold-700 dark:text-gold-100">{{ $menu->name }}</h1>
+                <p class="text-base leading-relaxed mb-6 text-gray-500 dark:text-gray-400">{{ $menu->description }}</p>
 
                 <div class="glass rounded-2xl p-6 mb-6">
                     <div class="flex items-baseline gap-2 mb-3">
                         <span class="font-serif text-3xl font-bold fade-gold">{{ rupiah($menu->price) }}</span>
-                        <span class="text-sm" style="color: rgba(248,217,125,0.45);">per porsi</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">per porsi</span>
                     </div>
-                    <p class="text-sm" style="color: rgba(248,217,125,0.5);">Dibarui segar setiap hari dengan biji kopi terbaik.</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Dibarui segar setiap hari dengan biji kopi terbaik.</p>
                 </div>
 
                 <form action="{{ route('cart.store', $menu->id) }}" method="POST" class="flex flex-col sm:flex-row gap-4 mt-auto">
@@ -45,7 +45,7 @@
                             <input type="number" name="qty" id="qty" value="1" min="1" max="20"
                                    class="w-full input-luxury text-center pr-14">
                             <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                <span class="text-sm" style="color: rgba(248,217,125,0.4);">pcs</span>
+                                <span class="text-sm text-gray-600 dark:text-gray-500">pcs</span>
                             </div>
                         </div>
                     </div>
