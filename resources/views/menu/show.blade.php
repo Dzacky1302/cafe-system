@@ -15,7 +15,7 @@
                     @if ($menu->imageUrl())
                         <img src="{{ $menu->imageUrl() }}" alt="{{ $menu->name }}" class="w-full h-full object-cover">
                     @else
-                        <div class="w-full h-full flex items-center justify-center text-6xl" style="background: rgba(212,175,55,0.07);">🍽️</div>
+                        <div class="w-full h-full flex items-center justify-center text-6xl" style="background: rgba(212,175,55,0.07);">️</div>
                     @endif
                     <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 50%, rgba(11,7,5,0.9) 100%);"></div>
                     <span class="absolute top-4 left-4 badge-gold">

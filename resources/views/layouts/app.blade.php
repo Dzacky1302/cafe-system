@@ -34,6 +34,52 @@
             },
         };
     </script>
+    <style>
+        /* Light theme overrides */
+        [data-theme="light"] {
+            --bg: #fdf6e3;
+            --bg-card: #ffffff;
+            --text: #1a110b;
+            --text-muted: #4a3d24;
+            --glass-bg: rgba(253, 246, 227, 0.85);
+            --glass-border: rgba(212, 175, 55, 0.25);
+            --gold-100: #d4af37;
+            --gold-300: #b8860b;
+            --gold-400: #8a6d1f;
+            --line-gold: rgba(212, 175, 55, 0.3);
+        }
+        [data-theme="light"] body {
+            background: #fdf6e3;
+            color: #1a110b;
+        }
+        [data-theme="light"] .nav-lux {
+            background: rgba(253, 246, 227, 0.9);
+            border-bottom-color: rgba(212, 175, 55, 0.2);
+        }
+        [data-theme="light"] .glass {
+            background: rgba(253, 246, 227, 0.85);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        [data-theme="light"] .card-gold {
+            background: #ffffff;
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        [data-theme="light"] .gold-glow,
+        [data-theme="light"] .gold-glow-2 {
+            display: none;
+        }
+        [data-theme="light"] .star-field {
+            display: none;
+        }
+        [data-theme="light"] .btn-gold-outline {
+            border-color: #b8860b;
+            color: #1a110b;
+        }
+        [data-theme="light"] .btn-gold-outline:hover {
+            background: #d4af37;
+            color: #fff;
+        }
+    </style>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -46,7 +92,7 @@
     <header class="nav-lux sticky top-0 z-50">
         <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
             <a href="{{ route('home') }}" class="brand-mark flex items-center gap-2">
-                <span>☕</span> {{ $microsite->name }}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-300)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M5 4v1h14v-1h-1v3h1v1h-1v2h-1v4h-1v2h-1v-2h-1v-4h-1v-1h-1v-1zM5 10h1v2H5zM9 10h1v2H9z"/></svg>{{ $microsite->name }}
             </a>
 
             <div class="hidden md:flex items-center gap-8">
@@ -64,6 +110,7 @@
                     @endif
                 </a>
 
+                <button type="button" id="themeToggle" class="btn-icon md:hidden" aria-label="Toggle Tema" title="Ganti Tema Gelap/Terang"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
                 <button type="button" id="mobileMenuBtn" class="btn-icon md:hidden" aria-label="Menu">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
@@ -136,12 +183,12 @@
                 </div>
                 <div class="text-left md:text-right">
                     <h3 class="font-serif text-xl font-bold mb-3" style="color: var(--gold-100);">Kontak</h3>
-                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);">🕗 {{ $microsite->settings['open_hours'] ?? '' }}</p>
-                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);">📞 {{ $microsite->settings['phone'] ?? '' }}</p>
+                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{{ $microsite->settings['open_hours'] ?? '' }}</p>
+                    <p class="text-sm mb-1" style="color: rgba(248,217,125,0.55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>{{ $microsite->settings['phone'] ?? '' }}</p>
                     <div class="flex gap-3 mt-3">
-                        <a href="#" class="btn-icon" aria-label="Facebook">📘</a>
-                        <a href="#" class="btn-icon" aria-label="Instagram">📷</a>
-                        <a href="#" class="btn-icon" aria-label="Twitter">🐦</a>
+                        <a href="https://facebook.com" class="btn-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="https://instagram.com" class="btn-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM1.75 17.25c1.17 1.17 2.58 1.78 4.16 1.78h3.14c1.58 0 3-0.61 4.16-1.78"/></svg></a>
+                        <a href="https://x.com" class="btn-icon" aria-label="Twitter/X" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10 10 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10 10 0 0 1 3 4.5a10 10 0 0 1 16-9A7 7 0 0 1 4 11z"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -213,6 +260,26 @@
             if (menuBtn && mobileMenu) {
                 menuBtn.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // ---- Theme toggle (gelap/terang) ----
+            var html = document.documentElement;
+            var themeBtn = document.getElementById('themeToggle');
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                html.setAttribute('data-theme', 'light');
+            }
+            if (themeBtn) {
+                themeBtn.addEventListener('click', function () {
+                    var isLight = html.getAttribute('data-theme') === 'light';
+                    if (isLight) {
+                        html.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        html.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                    }
                 });
             }
 

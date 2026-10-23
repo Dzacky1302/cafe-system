@@ -86,7 +86,7 @@
                 ['icon' => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-300)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v14H5zM5 5l14 14M14 14h6v6H14z"/><circle cx="12" cy="12" r="2"/></svg>', 'title' => 'Wi-Fi Gratis', 'desc' => 'Nyaman untuk nongkrong, bekerja, atau nongkrong panjang.'],
             ] as $feat)
                 <div class="card-gold p-8 text-center reveal-up">
-                    <div class="text-4xl mb-4">{{ $feat['icon'] }}</div>
+                    <div class="text-4xl mb-4">{!! $feat['icon'] !!}</div>
                     <h3 class="font-serif text-xl font-bold mb-2" style="color: var(--gold-100);">{{ $feat['title'] }}</h3>
                     <p class="text-sm leading-relaxed" style="color: rgba(248,217,125,0.58);">{{ $feat['desc'] }}</p>
                 </div>
