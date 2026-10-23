@@ -3,49 +3,53 @@
 @section('title', $menu->name . ' — ' . $microsite->name)
 
 @section('content')
-    <div class="max-w-4xl mx-auto">
-        <a href="{{ route('menu.index') }}" class="inline-flex items-center gap-2 text-brand-500 hover:text-brand-800 text-sm font-medium mb-6 reveal-up transition-colors">
-            ← Kembali ke menu
+    <div class="max-w-5xl mx-auto">
+        <a href="{{ route('menu.index') }}" class="btn-ghost mb-6 reveal-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Kembali ke menu
         </a>
 
-        <div class="grid md:grid-cols-2 gap-8 reveal-up">
-            <div class="relative rounded-3xl overflow-hidden border border-brand-100 shadow-xl">
-                @if ($menu->imageUrl())
-                    <img src="{{ $menu->imageUrl() }}" alt="{{ $menu->name }}" class="w-full h-64 object-cover">
-                @else
-                    <div class="w-full h-64 bg-brand-100 flex items-center justify-center text-6xl">🍽️</div>
-                @endif
-                <span class="absolute top-4 left-4 bg-white/90 backdrop-blur text-brand-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                    {{ $menu->category?->name }}
-                </span>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="card-gold overflow-hidden reveal-left">
+                <div class="relative h-72">
+                    @if ($menu->imageUrl())
+                        <img src="{{ $menu->imageUrl() }}" alt="{{ $menu->name }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center text-6xl" style="background: rgba(212,175,55,0.07);">🍽️</div>
+                    @endif
+                    <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 50%, rgba(11,7,5,0.9) 100%);"></div>
+                    <span class="absolute top-4 left-4 badge-gold">
+                        {{ $menu->category?->name }}
+                    </span>
+                </div>
             </div>
 
-            <div class="flex flex-col">
-                <p class="text-xs uppercase tracking-wider text-brand-500 font-semibold mb-2">{{ $menu->category?->name }}</p>
-                <h1 class="font-serif text-4xl font-bold text-brand-900 mb-4 leading-tight">{{ $menu->name }}</h1>
-                <p class="text-stone-600 text-lg leading-relaxed mb-6">{{ $menu->description }}</p>
+            <div class="flex flex-col reveal-right">
+                <p class="text-[11px] uppercase tracking-[0.28em] font-semibold mb-2" style="color: var(--gold-400);">{{ $menu->category?->name }}</p>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4 leading-tight" style="color: var(--gold-100);">{{ $menu->name }}</h1>
+                <p class="text-base leading-relaxed mb-6" style="color: rgba(248,217,125,0.62);">{{ $menu->description }}</p>
 
-                <div class="bg-brand-50/50 border border-brand-100 rounded-2xl p-6 mb-6">
-                    <div class="flex items-baseline gap-2 mb-4">
-                        <span class="font-serif text-3xl font-bold text-brand-900">{{ rupiah($menu->price) }}</span>
-                        <span class="text-stone-500 text-sm">per porsi</span>
+                <div class="glass rounded-2xl p-6 mb-6">
+                    <div class="flex items-baseline gap-2 mb-3">
+                        <span class="font-serif text-3xl font-bold fade-gold">{{ rupiah($menu->price) }}</span>
+                        <span class="text-sm" style="color: rgba(248,217,125,0.45);">per porsi</span>
                     </div>
-                    <p class="text-sm text-stone-600">Dibarui segar setiap hari dengan biji kopi terbaik.</p>
+                    <p class="text-sm" style="color: rgba(248,217,125,0.5);">Dibarui segar setiap hari dengan biji kopi terbaik.</p>
                 </div>
 
-                <form action="{{ route('cart.store', $menu->id) }}" method="POST" class="flex flex-col sm:flex-row gap-4">
+                <form action="{{ route('cart.store', $menu->id) }}" method="POST" class="flex flex-col sm:flex-row gap-4 mt-auto">
                     @csrf
                     <div class="flex-1">
-                        <label class="block text-xs font-medium text-stone-600 uppercase mb-2">Quantity</label>
+                        <label class="form-label" for="qty">Quantity</label>
                         <div class="relative">
-                            <input type="number" name="qty" value="1" min="1" max="20"
-                                   class="w-full border border-stone-300 rounded-xl px-4 py-3 input-luxury text-center">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-stone-400 text-sm">pcs</span>
+                            <input type="number" name="qty" id="qty" value="1" min="1" max="20"
+                                   class="w-full input-luxury text-center pr-14">
+                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                <span class="text-sm" style="color: rgba(248,217,125,0.4);">pcs</span>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn-gold bg-gold-400 text-brand-900 font-bold py-3.5 rounded-xl px-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 hover:bg-gold-300 flex items-center justify-center gap-2">
+                    <button type="submit" class="btn-gold px-8 py-3.5">
                         + Tambah ke Keranjang
                     </button>
                 </form>

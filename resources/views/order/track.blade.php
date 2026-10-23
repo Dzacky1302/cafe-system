@@ -3,15 +3,23 @@
 @section('title', 'Lacak Pesanan — ' . $microsite->name)
 
 @section('content')
-    <div class="max-w-lg mx-auto">
-        <h1 class="font-serif text-3xl font-bold text-brand-900 mb-2">🔍 Lacak Pesanan</h1>
-        <p class="text-stone-500 text-sm mb-10 reveal-up">Masukkan kode pesanan dari struk Anda</p>
+    <div class="max-w-2xl mx-auto">
+        {{-- ============ HEADER ============ --}}
+        <div class="text-center mb-10 reveal-up">
+            <p class="text-[11px] uppercase tracking-[0.28em] mb-2" style="color: var(--gold-400);">Order Tracking</p>
+            <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-3" style="color: var(--gold-100);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-100)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="ml-2">Lacak Pesanan</span></h1>
+            <p class="text-sm" style="color: rgba(248,217,125,0.55);">Masukkan kode pesanan dari struk Anda</p>
+            <div class="gold-rule mt-5 max-w-xs mx-auto"></div>
+        </div>
 
-        <form action="{{ route('order.track') }}" method="GET" class="glass rounded-2xl border border-brand-200 p-6 mb-10 reveal-up">
-            <div class="flex gap-2">
-                <input type="text" name="kode" value="{{ $code }}" placeholder="cth: KAFE-XXXX"
-                       class="flex-1 border border-stone-300 rounded-xl px-4 py-3 input-luxury">
-                <button class="btn-gold bg-gold-400 text-brand-900 font-bold px-6 py-3 rounded-xl hover:bg-gold-300 transition-all">
+        {{-- ============ SEARCH FORM ============ --}}
+        <form action="{{ route('order.track') }}" method="GET" class="glass rounded-2xl p-6 mb-10 reveal-up" style="transition-delay: 0.1s;">
+            <label for="kode" class="form-label">Kode Pesanan</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <input type="text" name="kode" id="kode" value="{{ $code }}" placeholder="cth: KAFE-XXXX"
+                       class="flex-1 input-luxury font-mono tracking-wider" autocomplete="off">
+                <button class="btn-gold px-7 py-3 shrink-0">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     Cari
                 </button>
             </div>
@@ -19,69 +27,123 @@
 
         @if ($searched)
             @if ($order)
-                <div class="glass rounded-2xl border border-brand-200 p-6 reveal-up" style="animation-delay: 0.1s;">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-mono text-xl font-bold text-brand-900">{{ $order->order_code }}</span>
-                        <span class="bg-gold-100 text-gold-800 px-2 py-0.5 rounded-full text-xs font-medium">
-                            {{ $order->status }}
+                {{-- ============ ORDER CARD ============ --}}
+                <div class="glass rounded-2xl p-6 sm:p-7 mb-8 reveal-up" style="transition-delay: 0.15s;">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+                        <span class="font-mono text-xl font-bold tracking-wider" style="color: var(--gold-100);">{{ $order->order_code }}</span>
+                        @php
+                            // Status yang benar-benar tersimpan di database (orders.status).
+                            $statusMap = [
+                                'baru'       => ['label' => 'Menunggu',     'class' => 'badge-status-pending'],
+                                'diproses'   => ['label' => 'Diproses',     'class' => 'badge-status-preparing'],
+                                'siap'       => ['label' => 'Siap Diantar', 'class' => 'badge-status-ready'],
+                                'selesai'    => ['label' => 'Selesai',      'class' => 'badge-status-done'],
+                                'dibatalkan' => ['label' => 'Dibatalkan',   'class' => 'badge-status-cancel'],
+                            ];
+                            $current = $statusMap[$order->status] ?? ['label' => ucfirst((string) $order->status), 'class' => ''];
+                        @endphp
+                        <span class="badge-status {{ $current['class'] }}">
+                            <span class="dot"></span>{{ $current['label'] }}
                         </span>
                     </div>
-                    <p class="text-stone-600 text-sm mb-6">{{ $order->customer_name }} • Meja {{ $order->table_number }}</p>
+                    <p class="text-sm mb-7" style="color: rgba(248,217,125,0.55);">
+                        {{ $order->customer_name }} <span style="color: rgba(248,217,125,0.3);">•</span> Meja {{ $order->table_number }}
+                    </p>
+                    {{-- ============ TIMELINE ============ --}}
+                    @php
+                        // Urutan status sesuai nilai yang tersimpan di database (orders.status).
+                        $statuses = [
+                            'baru'     => 'Diterima',
+                            'diproses' => 'Diproses',
+                            'siap'     => 'Siap Disajikan',
+                            'selesai'  => 'Selesai',
+                        ];
+                        $statusOrder = array_keys($statuses);
+                        $rawStatus = (string) ($order->status ?? 'baru');
+                        $isCancelled = $rawStatus === 'dibatalkan';
+                        $currentIndex = array_search($rawStatus, $statusOrder, true);
+                        if ($currentIndex === false) {
+                            $currentIndex = 0;
+                        }
+                        $subtitles = [
+                            'Pesanan telah diterima oleh barista',
+                            'Barista sedang menyeduh pesanan Anda',
+                            'Pesanan siap diantar ke meja Anda',
+                            'Pesanan telah selesai',
+                        ];
+                    @endphp
 
-                    {{-- Timeline --}}
-                    <div class="relative pl-8 mb-6">
-                        <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-brand-200"></div>
+                    @if ($isCancelled)
+                        {{-- ============ ORDER DIBATALKAN ============ --}}
+                        <div class="track-cancel mb-8">
+                            <div class="track-cancel-title mb-1">Pesanan Dibatalkan</div>
+                            <p class="text-sm" style="color: rgba(248,217,125,0.55);">
+                                Pesanan ini telah dibatalkan. Silakan hubungi barista jika Anda membutuhkan bantuan.
+                            </p>
+                        </div>
+                    @endif
 
-                        @php
-                            $statuses = ['pending' => 'Diterima', 'processing' => 'Diproses', 'ready' => 'Siap', 'completed' => 'Selesai'];
-                            $statusOrder = ['pending', 'processing', 'ready', 'completed'];
-                            $currentIndex = array_search($order->status, $statusOrder) ?? 0;
-                        @endphp
-
+                    <div class="track-timeline {{ $isCancelled ? 'is-cancelled' : '' }} mb-8">
                         @foreach ($statusOrder as $index => $statusKey)
-                            @php $isActive = $index <= $currentIndex; @endphp
-                            <div class="flex items-center mb-4 last:mb-0 relative z-10">
-                                <div class="w-8 h-8 rounded-full flex items-center justify-center
-                                    {{ $isActive ? 'bg-gold-400 border-2 border-gold-400 text-white' : 'bg-brand-50 border border-brand-200 text-brand-400' }}
-                                    shadow-sm transition-all">
-                                    <span class="text-xs font-bold">{{ $index + 1 }}</span>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium {{ $isActive ? 'text-brand-900' : 'text-stone-400' }}">
-                                        {{ $statuses[$statusKey] }}
-                                    </p>
-                                    <p class="text-xs {{ $isActive ? 'text-brand-600' : 'text-stone-300' }}">
-                                        {{ $index === 0 ? 'Pesanan telah diterima' : ($index === count($statusOrder)-1 ? 'Selesai' : '') }}
-                                    </p>
-                                </div>
+                            @php
+                                $state = $isCancelled
+                                    ? 'is-cancelled'
+                                    : ($index < $currentIndex ? 'is-done' : ($index === $currentIndex ? 'is-current' : 'is-pending'));
+                            @endphp
+                            <div class="track-step {{ $state }}">
+                                <span class="node">
+                                    @if ($isCancelled)
+                                        <span class="dot"></span>
+                                    @elseif ($index < $currentIndex)
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0b0705" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                                    @elseif ($index === $currentIndex)
+                                        <span class="dot"></span>
+                                    @endif
+                                </span>
+                                <p class="font-medium text-sm" style="color: {{ (! $isCancelled && $index <= $currentIndex) ? 'var(--gold-100)' : 'rgba(248,217,125,0.35)' }};">
+                                    {{ $statuses[$statusKey] }}
+                                </p>
+                                <p class="text-xs mt-0.5" style="color: {{ (! $isCancelled && $index <= $currentIndex) ? 'rgba(248,217,125,0.5)' : 'rgba(248,217,125,0.25)' }};">
+                                    @if ($isCancelled)
+                                        Tidak dilanjutkan
+                                    @else
+                                        {{ $index === $currentIndex ? 'Sedang berlangsung' : $subtitles[$index] }}
+                                    @endif
+                                </p>
                             </div>
                         @endforeach
                     </div>
+                    {{-- ============ ITEMS ============ --}}
+                    <div class="gold-rule mb-6"></div>
 
-                    {{-- Detail item --}}
                     <div class="space-y-3">
                         @foreach ($order->items as $item)
-                            <div class="flex justify-between text-sm border-b border-brand-50 pb-2">
-                                <span class="text-stone-600">{{ $item->item_name }} × {{ $item->quantity }}</span>
-                                <span class="font-medium text-brand-800">{{ rupiah($item->unit_price * $item->quantity) }}</span>
+                            <div class="flex justify-between items-center text-sm pb-3" style="border-bottom: 1px solid rgba(212,175,55,0.08);">
+                                <span style="color: rgba(248,217,125,0.7);">{{ $item->item_name }} <span style="color: rgba(248,217,125,0.4);">× {{ $item->quantity }}</span></span>
+                                <span class="font-medium" style="color: var(--gold-200);">{{ rupiah($item->unit_price * $item->quantity) }}</span>
                             </div>
                         @endforeach
-                        <div class="flex justify-between mt-4 pt-4 border-t border-brand-100">
-                            <span class="font-bold text-brand-900">Total</span>
-                            <span class="font-serif text-lg font-bold text-brand-900">{{ rupiah($order->total_price) }}</span>
+
+                        <div class="flex justify-between items-center mt-5 pt-5" style="border-top: 1px solid var(--line-gold);">
+                            <span class="font-bold" style="color: var(--gold-100);">Total</span>
+                            <span class="font-serif text-2xl font-bold fade-gold">{{ rupiah($order->total_price) }}</span>
                         </div>
                     </div>
                 </div>
             @else
-                <div class="text-center py-12 reveal-up">
-                    <div class="text-4xl mb-4">🔍</div>
-                    <h3 class="font-serif text-xl font-bold text-brand-900 mb-2">Pesanan tidak ditemukan</h3>
-                    <p class="text-stone-500">Kode pesanan <span class="font-mono font-bold">{{ $code }}</span> tidak ditemukan dalam kami.</p>
+                {{-- ============ NOT FOUND ============ --}}
+                <div class="text-center py-16 reveal-up">
+                    <div class="text-5xl mb-5"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+                    <h3 class="font-serif text-2xl font-bold mb-2" style="color: var(--gold-100);">Pesanan tidak ditemukan</h3>
+                    <p class="text-sm" style="color: rgba(248,217,125,0.5);">
+                        Kode pesanan <span class="font-mono font-bold" style="color: var(--gold-300);">{{ $code }}</span> tidak ditemukan pada kami.
+                    </p>
                 </div>
             @endif
         @else
-            <div class="text-center py-12 reveal-up">
-                <p class="text-stone-500 text-sm">Masukkan kode pesanan dari struk/halaman sukses.</p>
+            {{-- ============ EMPTY STATE ============ --}}
+            <div class="text-center py-16 reveal-up">
+                <p class="text-sm" style="color: rgba(248,217,125,0.45);">Masukkan kode pesanan dari struk / halaman sukses.</p>
             </div>
         @endif
     </div>
