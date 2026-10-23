@@ -35,49 +35,138 @@
         };
     </script>
     <style>
-        /* Light theme overrides */
+        /* ============ LIGHT THEME OVERRIDES (comprehensive) ============ */
         [data-theme="light"] {
-            --bg: #fdf6e3;
+            --bg-base: #faf6ef;
             --bg-card: #ffffff;
-            --text: #1a110b;
-            --text-muted: #4a3d24;
-            --glass-bg: rgba(253, 246, 227, 0.85);
-            --glass-border: rgba(212, 175, 55, 0.25);
-            --gold-100: #d4af37;
-            --gold-300: #b8860b;
-            --gold-400: #8a6d1f;
+            --glass-bg: rgba(250, 246, 239, 0.9);
+            --glass-border: rgba(45, 36, 26, 0.12);
+            --border: rgba(45, 36, 26, 0.12);
+            --border-strong: rgba(45, 36, 26, 0.22);
             --line-gold: rgba(212, 175, 55, 0.3);
+            --shadow-card: 0 16px 44px rgba(45, 36, 26, 0.08);
+            --shadow-card-hover: 0 22px 60px rgba(45, 36, 26, 0.12);
+            --gold-100: #b8860b;
+            --gold-300: #8a6d1f;
+            --gold-400: #5f4d15;
+            --text-base: #2d241a;
+            --text-muted: rgba(45, 36, 26, 0.62);
+            --brand-50: rgba(212, 175, 55, 0.07);
+            --brand-100: rgba(212, 175, 55, 0.12);
         }
         [data-theme="light"] body {
-            background: #fdf6e3;
-            color: #1a110b;
+            background: #faf6ef;
+            color: #2d241a;
         }
         [data-theme="light"] .nav-lux {
-            background: rgba(253, 246, 227, 0.9);
-            border-bottom-color: rgba(212, 175, 55, 0.2);
+            background: rgba(250, 246, 239, 0.92);
+            border-bottom-color: rgba(45, 36, 26, 0.12);
+        }
+        [data-theme="light"] .nav-lux.scrolled {
+            background: rgba(250, 246, 239, 0.97);
         }
         [data-theme="light"] .glass {
-            background: rgba(253, 246, 227, 0.85);
-            border-color: rgba(212, 175, 55, 0.25);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(45, 36, 26, 0.15);
         }
         [data-theme="light"] .card-gold {
             background: #ffffff;
-            border-color: rgba(212, 175, 55, 0.25);
+            border-color: rgba(45, 36, 26, 0.15);
         }
         [data-theme="light"] .gold-glow,
         [data-theme="light"] .gold-glow-2 {
-            display: none;
+            display: none !important;
         }
         [data-theme="light"] .star-field {
-            display: none;
+            display: none !important;
+        }
+        [data-theme="light"] [style*="color: var(--gold-100)"],
+        [data-theme="light"] [style*='color: var(--gold-100)'] {
+            color: #b8860b !important;
+        }
+        [data-theme="light"] [style*="color: var(--gold-300)"],
+        [data-theme="light"] [style*='color: var(--gold-300)'] {
+            color: #8a6d1f !important;
+        }
+        [data-theme="light"] [style*="color: var(--gold-400)"],
+        [data-theme="light"] [style*='color: var(--gold-400)'] {
+            color: #5f4d15 !important;
         }
         [data-theme="light"] .btn-gold-outline {
-            border-color: #b8860b;
+            border-color: #8a6d1f;
             color: #1a110b;
         }
         [data-theme="light"] .btn-gold-outline:hover {
             background: #d4af37;
             color: #fff;
+        }
+        [data-theme="light"] .btn-ghost {
+            color: #2d241a;
+        }
+        [data-theme="light"] .btn-ghost:hover {
+            background: rgba(45, 36, 26, 0.08);
+        }
+        [data-theme="light"] .input-luxury {
+            background: #ffffff;
+            border-color: rgba(45, 36, 26, 0.2);
+            color: #2d241a;
+        }
+        [data-theme="light"] .input-luxury::placeholder {
+            color: rgba(45, 36, 26, 0.45);
+        }
+        [data-theme="light"] .badge-status-pending,
+        [data-theme="light"] .badge-status-preparing,
+        [data-theme="light"] .badge-status-ready,
+        [data-theme="light"] .badge-status-done,
+        [data-theme="light"] .badge-status-cancel {
+            color: #2d241a;
+            border-color: rgba(45, 36, 26, 0.2);
+        }
+        [data-theme="light"] .badge-status-pending .dot,
+        [data-theme="light"] .badge-status-preparing .dot,
+        [data-theme="light"] .badge-status-ready .dot,
+        [data-theme="light"] .badge-status-done .dot,
+        [data-theme="light"] .badge-status-cancel .dot {
+            background: #b8860b;
+        }
+        [data-theme="light"] .gold-rule {
+            background: rgba(45, 36, 26, 0.12);
+        }
+        [data-theme="light"] svg[stroke="var(--gold-100)"],
+        [data-theme="light"] svg[stroke="var(--gold-300)"],
+        [data-theme="light"] svg[stroke="var(--gold-400)"] {
+            stroke: #8a6d1f !important;
+        }
+        [data-theme="light"] svg[stroke="currentColor"] {
+            stroke: #2d241a !important;
+        }
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.55)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.55)'],
+        [data-theme="light"] [style*="color: rgba(248, 217, 125, 0.55)"],
+        [data-theme="light"] [style*='color: rgba(248, 217, 125, 0.55)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.5)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.5)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.45)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.45)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.4)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.4)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.3)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.3)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.25)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.25)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.2)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.2)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.15)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.15)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.08)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.08)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.72)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.72)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.7)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.7)'],
+        [data-theme="light"] [style*="color: rgba(248,217,125,0.58)"],
+        [data-theme="light"] [style*='color: rgba(248,217,125,0.58)'] {
+            color: rgba(45, 36, 26, 0.62) !important;
         }
     </style>
 
@@ -110,7 +199,7 @@
                     @endif
                 </a>
 
-                <button type="button" id="themeToggle" class="btn-icon md:hidden" aria-label="Toggle Tema" title="Ganti Tema Gelap/Terang"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+                <button type="button" id="themeToggle" class="btn-icon" aria-label="Toggle Tema" title="Ganti Tema Gelap/Terang"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
                 <button type="button" id="mobileMenuBtn" class="btn-icon md:hidden" aria-label="Menu">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
