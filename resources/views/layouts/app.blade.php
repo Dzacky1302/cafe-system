@@ -38,11 +38,11 @@
         /* ============ CSS VARIABLE OVERRIDES FOR LIGHT THEME ============ */
         /* Ensures inline style="color: var(--gold-*)" works in light theme */
         html:not(.dark) {
-            --gold-100: #b8860b;
-            --gold-300: #8a6d1f;
-            --gold-400: #5f4d15;
-            --gold-200: #d4af37;
-            --line-gold: rgba(45, 36, 26, 0.12);
+            --gold-100: #fcd31e;
+            --gold-200: #f57f17;
+            --gold-300: #ffb300;
+            --gold-400: #ff9800;
+            --line-gold: rgba(255, 152, 0, 0.15);
         }
 
         /* ============ BASE DARK THEME (default, html.dark) ============ */
