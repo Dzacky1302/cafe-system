@@ -100,10 +100,10 @@
                                         <span class="dot"></span>
                                     @endif
                                 </span>
-                                <p class="font-medium text-sm" style="color: {{ (! $isCancelled && $index <= $currentIndex) ? 'var(--gold-100)' : 'rgba(248,217,125,0.35)' }};">
+                                <p class="font-medium text-sm {{ (! $isCancelled && $index <= $currentIndex) ? 'text-gold-700 dark:text-gold-100' : 'text-gray-500 dark:text-gray-400' }}">
                                     {{ $statuses[$statusKey] }}
                                 </p>
-                                <p class="text-xs mt-0.5" style="color: {{ (! $isCancelled && $index <= $currentIndex) ? 'rgba(248,217,125,0.5)' : 'rgba(248,217,125,0.25)' }};">
+                                <p class="text-xs mt-0.5 {{ (! $isCancelled && $index <= $currentIndex) ? 'text-gray-500 dark:text-gray-400' : 'text-gray-400 dark:text-gray-300' }}">
                                     @if ($isCancelled)
                                         Tidak dilanjutkan
                                     @else
